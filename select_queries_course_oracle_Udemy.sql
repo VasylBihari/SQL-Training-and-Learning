@@ -19,7 +19,7 @@ SELECT *
 FROM employees 
 WHERE first_name LIKE '%\%%' ESCAPE '\'
 
--- Display job_id, name and salary information for employees whose job id is greater than or equal to 120  and job_id is not equal to IT_PROG. Sort the rows by job_id (ascending order) and name (descending order) 
+-- Display job_id, name and salary information for employees whose job id is greater than or equal to 120  and job_id is not equal to IT_PROG. Sort the rows by job_id (ascending order) and name (descending order).
 SELECT job_id, first_name, salary 
 FROM employees
 WHERE job_id >=120 
