@@ -26,4 +26,15 @@ SELECT *
 FROM employees 
 WHERE length (first_name)>10
 
+-- Get a list of all employees whose salary is a multiple of 1000.
+SELECT * 
+FROM employees 
+WHERE MOD(salary, 1000) = 0;
 
+-- Display the date of next Friday.
+SELECT NEXT_DAY ('27-01-23', 'FRIDAY') 
+FROM dual
+
+-- Print the phone number by replacing all '.' in the PHONE_NUMBER value with '-'.
+SELECT REPLACE (PHONE_NUMBER,'.','-') 
+FROM EMPLOYEES
