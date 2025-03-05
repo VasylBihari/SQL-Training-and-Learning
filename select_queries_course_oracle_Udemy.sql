@@ -25,3 +25,5 @@ ORDER BY job_id, first_name desc
 SELECT *
 FROM employees 
 WHERE length (first_name)>10
+
+
