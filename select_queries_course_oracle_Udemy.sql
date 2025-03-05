@@ -14,19 +14,19 @@ SELECT *
 FROM employees 
 WHERE first_name like '_a%a'
 
--- Get a list of all employees whose name contains the '%' character
+-- Get a list of all employees whose name contains the '%' character.
 SELECT * 
 FROM employees 
-WHERE first_name LIKE '%\%%' ESCAPE '\';
+WHERE first_name LIKE '%\%%' ESCAPE '\'
 
--- Get job_id, name and salary information for employees whose job id is greater than or equal to 120  and job_id is not equal to IT_PROG. Sort the rows by job_id (ascending order) and name (descending order)  
+-- Get job_id, name and salary information for employees whose job id is greater than or equal to 120  and job_id is not equal to IT_PROG. Sort the rows by job_id (ascending order) and name (descending order). 
 SELECT job_id, first_name, salary
 FROM employees
 WHERE job_id >=120 
 AND job_id != 'IT_PROG'
 ORDER BY job_id, first_name desc
 
--- Get a list of all employees whose name length is greater than 10
+-- Get a list of all employees whose name length is greater than 10.
 SELECT *
 FROM employees 
-WHERE length (first_name)>10;
+WHERE length (first_name)>10
