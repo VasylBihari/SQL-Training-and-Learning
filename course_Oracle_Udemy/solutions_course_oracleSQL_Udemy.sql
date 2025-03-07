@@ -101,3 +101,20 @@ SELECT department_name
 FROM departments d 
 LEFT OUTER JOIN employees e ON (d.department_id=e.department_id)
 WHERE first_name IS NULL
+
+--Display all employee information with the longest name
+SELECT * 
+FROM employees 
+WHERE length (first_name)=(SELECT max (length (first_name)) FROM employees)
+
+--Display all information about employees with salaries greater than the average salary of all employees.
+SELECT * 
+FROM employees 
+WHERE salary>(SELECT AVG(salary) FROM employees)
+
+--Display all information about employees whose managers were hired in 2005, but whose employees were hired before 2005
+SELECT * 
+FROM hr.employees 
+WHERE manager_id IN (SELECT employee_id FROM hr.employees WHERE TO_CHAR (hire_date, 'YYYY')='2005')
+AND hire_date<to_date('01-01-2005', 'DD-MM-YYYY');
+
