@@ -69,4 +69,35 @@ GROUP BY DEPARTMENT_ID
 HAVING COUNT (*)>30 
 AND sum (salary)>300000
 
---
+--Display job_id information and rounded average salary
+SELECT JOB_ID, round (avg (salary)) 
+FROM employees 
+GROUP BY JOB_ID
+
+--Get a list of manager_ids whose average salary of all of his non-commission subordinates is between 6000 and 9000.
+SELECT MANAGER_ID, avg (salary) 
+FROM employees  
+WHERE commission_pct IS NULL 
+GROUP BY MANAGER_ID 
+HAVING avg (salary) BETWEEN 6000 AND 9000
+
+--Display detailed information about each employee: first name, last name, department name, job_id, address, country and region (used in query "join")
+SELECT FIRST_NAME, LAST_NAME, DEPARTMENT_NAME, job_id, STREET_ADDRESS, COUNTRY_NAME, REGION_NAME 
+FROM countries c
+JOIN regions r ON (r.REGION_ID=c.REGION_ID)
+JOIN locations l ON (c.COUNTRY_ID=l.COUNTRY_ID)
+JOIN departments d ON (l.LOCATION_ID=d.LOCATION_ID)
+JOIN employees e ON (e.DEPARTMENT_ID=d.DEPARTMENT_ID)
+
+--Display information about the names of managers who have more than 6 employees under their control, and also display the number of employees who report to them ((used in query "join" from different tables)
+SELECT e1.first_name manager_name, COUNT(*) 
+FROM employees e1
+JOIN employees e2 ON (e1.employee_id=e2.manager_id) 
+GROUP BY e1.first_name 
+HAVING COUNT (*)>6
+
+--Print the names of all departments that do not have a single employee
+SELECT department_name 
+FROM departments d 
+LEFT OUTER JOIN employees e ON (d.department_id=e.department_id)
+WHERE first_name IS NULL
