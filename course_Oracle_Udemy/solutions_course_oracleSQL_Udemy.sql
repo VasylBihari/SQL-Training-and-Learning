@@ -116,5 +116,18 @@ WHERE salary>(SELECT AVG(salary) FROM employees)
 SELECT * 
 FROM hr.employees 
 WHERE manager_id IN (SELECT employee_id FROM hr.employees WHERE TO_CHAR (hire_date, 'YYYY')='2005')
-AND hire_date<to_date('01-01-2005', 'DD-MM-YYYY');
+AND hire_date<to_date('01-01-2005', 'DD-MM-YYYY')
 
+--Create a table friends using subquery so that after creation it contains the values ​​of the following columns from the employees table: employee_id, first_name, last_name for those rows where there are commissions. The columns in the friends table should be named id, name, surname
+CREATE TABLE friends AS 
+(SELECT employee_id id, first_name name, last_name surname FROM employees WHERE commission_pct IS NOT NULL)
+
+--Create the emp1000 table using subquery so that after creation it contains the values ​​of the following columns from the employees table: first_name, last_name, salary, department_id.
+CREATE TABLE emp1000 
+AS (SELECT first_name, last_name, salary, department_id FROM employees)
+
+--Create a sequence seq1000 that starts at 12, increments by 4, has a maximum value of 200, and loops.
+CREATE SEQUENCE seq1000
+START WITH 12 INCREMENT BY 4
+maxvalue 200
+CYCLE
