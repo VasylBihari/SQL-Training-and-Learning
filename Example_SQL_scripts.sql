@@ -39,7 +39,7 @@ FROM employees
 GROUP BY name
 HAVING COUNT(*) > 1;
 
-/*2. Get the Second Highest Salary*/
+/* Get the Second Highest Salary*/
 SELECT MAX(salary) AS second_highest
 FROM employees
 WHERE salary < (
@@ -47,12 +47,11 @@ WHERE salary < (
   FROM employees
 );
 
-/*Running Totals*/
+/*Running Totals. Essential in dashboards and financial reports.*/
 SELECT name, salary,
        SUM(salary) OVER (ORDER BY id) AS running_total
 FROM employees;
 
-Essential in dashboards and financial reports.
 
 /* Customers with No Orders. Very common in e-commerce or CRM platforms.*/
 SELECT c.customer_id, c.name
