@@ -1,4 +1,4 @@
-/* Top N Records Per Group (e.g., Top 3 earners in each department). Used in*: Performance reviews, department-level reports */
+/* Top N Records Per Group (e.g., Top 3 earners in each department). Used in: Performance reviews, department-level reports */
 SELECT *
 FROM (
   SELECT *,
