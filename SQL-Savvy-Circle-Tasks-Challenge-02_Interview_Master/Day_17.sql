@@ -1,3 +1,5 @@
+/*https://www.interviewmaster.ai/question/user-playlist-retention-and-discovery-rates*/
+
 /*How many unique users have added at least one recommended track to their playlists in October 2024?
 Tables
 tracks_added(interaction_id, user_id, track_id, added_date, is_recommended)
