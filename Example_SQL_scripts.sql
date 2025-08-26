@@ -8,14 +8,12 @@ FROM (
 WHERE rnk <= 3;
 
 /*Find Gaps in Dates (Missing Days). Used in*: Shift tracking, employee attendance, logs*/
-``` 
 SELECT d.date
 FROM calendar d
 LEFT JOIN attendance a ON d.date = a.attendance_date
 WHERE a.attendance_date IS NULL;
 
 /* Percentage of Total. Used in*: Pie charts, resource distribution, dashboards*/
-``` 
 SELECT department,
        COUNT(*) AS total_employees,
        ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER(), 2) AS percentage
@@ -35,7 +33,7 @@ SELECT customer_id,
 FROM orders
 GROUP BY customer_id;
 
- /*1. Finding Duplicates*/
+ /*Finding Duplicates*/
 SELECT name, COUNT(*) 
 FROM employees
 GROUP BY name
