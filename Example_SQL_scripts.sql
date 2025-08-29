@@ -88,7 +88,86 @@ WITH RECURSIVE employee_tree AS (
   INNER JOIN employee_tree et ON e.manager_id = et.id
 )
 SELECT * FROM employee_tree;
+--------------------------------------------------------------------------------------------------------------
+*1️⃣ Retrieve Top N Records*  
+*Q:* Get top 5 highest selling products.  
+SQL
 
+SELECT product_id, SUM(amount) AS total_sales  
+FROM sales  
+GROUP BY product_id  
+ORDER BY total_sales DESC  
+LIMIT 5;
+*2️⃣ Find Duplicate Records*  
+*Q:* Identify duplicate emails in the users table.  
+SQL
+
+SELECT email, COUNT(*)  
+FROM users  
+GROUP BY email  
+HAVING COUNT(*) > 1;
+*3️⃣ Use Window Functions*  
+*Q:* Add a running total of sales by date.  
+SQL
+
+SELECT date, amount,  
+  SUM(amount) OVER (ORDER BY date) AS running_total  
+FROM sales;
+*4️⃣ Join Multiple Tables*  
+*Q:* List customer names and their total orders.  
+SQL
+
+SELECT c.name, COUNT(o.order_id) AS total_orders  
+FROM customers c  
+JOIN orders o ON c.customer_id = o.customer_id  
+GROUP BY c.name;
+*5️⃣ Filter with Subqueries*  
+*Q:* Find products priced higher than the average.  
+SQL
+
+SELECT * FROM products  
+WHERE price > (SELECT AVG(price) FROM products);
+*6️⃣ Use CASE for Categorization*  
+*Q:* Label customers as 'High', 'Medium', 'Low' spenders.  
+SQL
+
+SELECT name,  
+  CASE  
+    WHEN total_spent > 1000 THEN 'High'  
+    WHEN total_spent > 500 THEN 'Medium'  
+    ELSE 'Low'  
+  END AS category  
+FROM customers;
+*7️⃣ Handle NULLs*  
+*Q:* Replace NULL phone numbers with 'Not Provided'.  
+SQL
+
+SELECT name, COALESCE(phone, 'Not Provided') AS phone  
+FROM users;
+*8️⃣ Date Functions*  
+*Q:* Count orders placed in the last 30 days.  
+SQL
+
+SELECT COUNT(*)  
+FROM orders  
+WHERE order_date >= CURRENT_DATE - INTERVAL '30 days';
+*9️⃣ Group By with Multiple Columns*  
+*Q:* Total revenue by region and product.  
+SQL
+
+SELECT region, product_id, SUM(amount)  
+FROM sales  
+GROUP BY region, product_id;
+*🔟 CTEs & Temporary Tables*  
+*Q:* Use a CTE to find top customers.  
+SQL
+
+WITH top_customers AS (
+  SELECT customer_id, SUM(amount) AS total  
+  FROM orders  
+  GROUP BY customer_id  
+)
+SELECT * FROM top_customers WHERE total > 1000;
 
 
 
